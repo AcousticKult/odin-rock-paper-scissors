@@ -6,7 +6,7 @@ This is the third project from [The Odin Project's Foundations course](https://w
 My learnings from this project include:
 * Creating a simple browser console game using JavaScript
 * Using functions to create reusable blocks of code
-* Problem solving using the browser debugger and **console.log()**
+* Problem solving using the browser debugger and `console.log()`
 * Version control using Git and GitHub
 
 
