@@ -53,12 +53,14 @@ function game() {
         if (i < 4) {
             playerSelection = (prompt('Choose your weapon: rock 🪨, paper 🧻, scissors ✂')).toLowerCase();
             computerSelection = getComputerChoice();
-        } else if (playerScore > computerScore) {
-            console.log("Congratulations! You are the winner!");
-        } else if (computerScore < playerScore) {
-            console.log("You lose! Better luck next time!");
         } else {
-            console.log("There are no winners, only survivors 💀");
+            if (playerScore > computerScore) {
+                console.log("Congratulations! You are the winner! 🏆");
+            } else if (computerScore < playerScore) {
+                console.log("You lose! Better luck next time! 😔");
+            } else {
+                console.log("There are no winners, only survivors 💀");
+            }
         }
     }
 }
