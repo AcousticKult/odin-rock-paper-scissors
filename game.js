@@ -1,12 +1,14 @@
 const computerArray = ["rock", "paper", "scissors"];
 
+// Create counters for player and computer wins
+let playerScore = 0;
+let computerScore = 0;
+
+// Randomly return rock || paper || scissors
 function getComputerChoice() {
-    //  randomly RETURN rock || paper || scissors
     let randomChoice = computerArray[Math.floor(Math.random() * computerArray.length)];
     return randomChoice;
     }
-
-// console.log(getComputerChoice());
 
 function playRound(playerSelection, computerSelection) {
     //  FIND A PATTERN
@@ -16,37 +18,29 @@ function playRound(playerSelection, computerSelection) {
     let invalidText = 'No winner!';
 
     if (playerSelection === 'rock' && computerSelection === 'scissors') {
+        ++playerScore;
         return winnerText;
     } else if (playerSelection === 'rock' && computerSelection === 'paper') {
+        ++computerScore;
         return loserText;
     } else if (playerSelection === 'paper' && computerSelection === 'rock') {
+        ++playerScore;
         return winnerText;
     } else if (playerSelection === 'paper' && computerSelection === 'scissors') {
+        ++computerScore;
         return loserText;
     } else if (playerSelection === 'scissors' && computerSelection === 'paper') {
+        ++playerScore;
         return winnerText;
     } else if (playerSelection === 'scissors' && computerSelection === 'rock') {
+        ++computerScore;
         return loserText;
     } else {return invalidText}
     //  RETURN strings based on comparison (might need to change RETURN value)
 }
 
-//  check if player enters INVALID CHOICE (might need to be separate function with playerSelection?)
-    // if ((playerSelection.toLowerCase() !== 'rock') 
-    // || (playerSelection.toLowerCase() !== 'paper')
-    // || (playerSelection.toLowerCase() !== 'scissors')) {
-    //     console.log(playerSelection);
-    //     return "Invalid Entry! Please refresh the page to try again.";
-
 let playerSelection = (prompt('Choose your weapon: rock 🪨, paper 🧻, scissors ✂')).toLowerCase();
 let computerSelection = getComputerChoice();
-
-// console.log(playRound(playerSelection, computerSelection));
-// console.log(`Player: ${playerSelection}, Computer: ${computerSelection}`);
-
-// Create counters for player and computer wins
-const playerWin = 0;
-const computerWin = 0;
 
 function game() {
     for (let i = 0; i < 5; i++) {
@@ -54,21 +48,19 @@ function game() {
         
         //  CONSOLE.LOG results of playRound()
         console.log(playRound(playerSelection, computerSelection));
-        console.log(`Player: ${playerSelection}, Computer: ${computerSelection}`);
+        console.log(`Player: ${playerSelection}, Score: ${playerScore} \nComputer: ${computerSelection}, Score: ${computerScore}`);
 
         if (i < 4) {
             playerSelection = (prompt('Choose your weapon: rock 🪨, paper 🧻, scissors ✂')).toLowerCase();
             computerSelection = getComputerChoice();
-        } // else {COUNT winnerText OR playerWin}
+        } else if (playerScore > computerScore) {
+            console.log("Congratulations! You are the winner!");
+        } else if (computerScore < playerScore) {
+            console.log("You lose! Better luck next time!");
+        } else {
+            console.log("There are no winners, only survivors 💀");
+        }
     }
-    
-    //  declare winner at the end of 5 rounds (might need another function to compare winner/loser OR use changed RETURN value from playRound())
-    // if (invalidText > 3) {
-    //    console.log("There are no winners, only survivors 💀");
-    //} else if (loserText > 3) {
-    //    console.log("You lose! Better luck next time!");
-    //} else (console.log("Congratulations! You are the winner!"));
-
 }
 
 game();
