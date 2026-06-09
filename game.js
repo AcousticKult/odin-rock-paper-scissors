@@ -1,14 +1,16 @@
-// Randomly return rock || paper || scissors
-const computerArray = ["rock", "paper", "scissors"];
-
-function getComputerChoice() {
-    let randomChoice = computerArray[Math.floor(Math.random() * computerArray.length)];
-    return randomChoice;
-}
+let playerSelection = (prompt('Choose your weapon: rock 🪨, paper 🧻, scissors ✂')).toLowerCase();
+let computerSelection = getComputerChoice();
 
 // Create counters for player and computer wins
 let playerScore = 0;
 let computerScore = 0;
+
+// Randomly return rock || paper || scissors
+function getComputerChoice() {
+    const computerArray = ["rock", "paper", "scissors"];
+    let randomChoice = computerArray[Math.floor(Math.random() * computerArray.length)];
+    return randomChoice;
+}
 
 function displayWinner() {
     ++playerScore;
@@ -19,9 +21,6 @@ function displayLoser() {
     ++computerScore;
     return `You Lose! ${computerSelection.toUpperCase()} beats ${playerSelection.toUpperCase()}.`;
 }
-
-let playerSelection = (prompt('Choose your weapon: rock 🪨, paper 🧻, scissors ✂')).toLowerCase();
-let computerSelection = getComputerChoice();
 
 // Play a round using playerSelection and computerSelection
 function playRound(playerSelection, computerSelection) {
@@ -41,7 +40,7 @@ function playRound(playerSelection, computerSelection) {
 }
 
 // Play 5 rounds of the game
-function game() {
+function playGame() {
     for (let i = 0; i < 5; i++) {
         playRound();
         
@@ -64,7 +63,4 @@ function game() {
     }
 }
 
-game();
-
-// rework any functions + return values if needed
-// create any additional helper functions if needed 
+playGame();
