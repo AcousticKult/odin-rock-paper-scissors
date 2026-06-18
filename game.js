@@ -1,46 +1,67 @@
-let playerSelection = (prompt('Choose your weapon: rock 🪨, paper 🧻, scissors ✂')).toLowerCase();
-let computerSelection = getComputerChoice();
-
 // Create counters for player and computer wins
 let playerScore = 0;
 let computerScore = 0;
 
-// Randomly return rock || paper || scissors
+// select results divs
+const results = document.getElementById("results");
+const runningScore = document.getElementById("runningScore");
+const finalScore = document.getElementById("finalScore");
+
+// computerSelection: randomly return rock || paper || scissors
 function getComputerChoice() {
     const computerArray = ["rock", "paper", "scissors"];
     let randomChoice = computerArray[Math.floor(Math.random() * computerArray.length)];
     return randomChoice;
 }
 
-function displayWinner() {
-    ++playerScore;
-    return `You Win! ${playerSelection.toUpperCase()} beats ${computerSelection.toUpperCase()}.`;
-}
+// playerSelection: select buttons in dom
+let buttonSelection = document.querySelectorAll("button");
 
-function displayLoser() {
-    ++computerScore;
-    return `You Lose! ${computerSelection.toUpperCase()} beats ${playerSelection.toUpperCase()}.`;
-}
+buttonSelection.forEach((userItem) => {
+    userItem.addEventListener("click", (event) => {
+        let score = playRound(event.target.name);
+        const para = document.createElement("p");
+        runningScore.append(para);
+        para.append(score);
+    });
+});
 
-// Play a round using playerSelection and computerSelection
-function playRound(playerSelection, computerSelection) {
+// Play a round
+function playRound(playerSelection) {
+    let computerSelection = getComputerChoice();
+    
     if (playerSelection === 'rock' && computerSelection === 'scissors') {
-        return displayWinner();
+        ++playerScore;
+        return `You Win! ${playerSelection.toUpperCase()} beats ${computerSelection.toUpperCase()}.\n`;
     } else if (playerSelection === 'rock' && computerSelection === 'paper') {
-        return displayLoser();
+        ++computerScore;
+        return `You Lose! ${computerSelection.toUpperCase()} beats ${playerSelection.toUpperCase()}.`;
     } else if (playerSelection === 'paper' && computerSelection === 'rock') {
-        return displayWinner();
+        ++playerScore;
+        return `You Win! ${playerSelection.toUpperCase()} beats ${computerSelection.toUpperCase()}.`;
     } else if (playerSelection === 'paper' && computerSelection === 'scissors') {
-        return displayLoser();
+        ++computerScore;
+        return `You Lose! ${computerSelection.toUpperCase()} beats ${playerSelection.toUpperCase()}.`;
     } else if (playerSelection === 'scissors' && computerSelection === 'paper') {
-        return displayWinner();
+        ++playerScore;
+        return `You Win! ${playerSelection.toUpperCase()} beats ${computerSelection.toUpperCase()}.`;
     } else if (playerSelection === 'scissors' && computerSelection === 'rock') {
-        return displayLoser();
+        ++computerScore;
+        return `You Lose! ${computerSelection.toUpperCase()} beats ${playerSelection.toUpperCase()}.`;
     } else {return 'No Winner!'}
+
+    // runningScore.append(lineBreak);
+
+    // console.log(playerScore, computerScore);
 }
+
+// function runningScore(score, message) {
+    // see running score after playRound has been called and store in score
+    // take return value from playRound and store in message
+// }
 
 // Play 5 rounds of the game
-function playGame() {
+/* function playGame() {
     for (let i = 0; i < 5; i++) {
         playRound();
         
@@ -61,6 +82,19 @@ function playGame() {
             }
         }
     }
+} */
+
+// playGame();
+
+
+/* function displayWinner() {
+    ++playerScore;
+    return `You Win! ${playerSelection.toUpperCase()} beats ${computerSelection.toUpperCase()}.`;
 }
 
-playGame();
+function displayLoser() {
+    ++computerScore;
+    return `You Lose! ${computerSelection.toUpperCase()} beats ${playerSelection.toUpperCase()}.`;
+} */
+
+// let playerSelection = (prompt('Choose your weapon: rock 🪨, paper 🧻, scissors ✂')).toLowerCase();
