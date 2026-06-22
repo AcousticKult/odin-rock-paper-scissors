@@ -2,10 +2,12 @@
 let playerScore = 0;
 let computerScore = 0;
 
-// select results divs
+// Add divs to results divs
 const results = document.getElementById("results");
-const runningScore = document.getElementById("runningScore");
+const runningScore = document.createElement("div");
 const finalScore = document.getElementById("finalScore");
+const finalResult = document.createElement("div");
+
 
 // computerSelection: randomly return rock || paper || scissors
 function getComputerChoice() {
@@ -14,15 +16,19 @@ function getComputerChoice() {
     return randomChoice;
 }
 
-// playerSelection: select buttons in dom
+// Player selection: select buttons in dom
 let buttonSelection = document.querySelectorAll("button");
 
+// [WRAP THIS IN A FUNCTION THAT CAN BE CALLED WITH BUTTON CLICKS?]
 buttonSelection.forEach((userItem) => {
     userItem.addEventListener("click", (event) => {
         let score = playRound(event.target.name);
-        const para = document.createElement("p");
-        runningScore.append(para);
-        para.append(score);
+        runningScore.textContent = score;
+        results.append(runningScore);
+        
+        checkFinalScore();
+
+        finalScore.textContent = `Player Score: ${playerScore} Computer Score: ${computerScore}`;
     });
 });
 
@@ -32,7 +38,7 @@ function playRound(playerSelection) {
     
     if (playerSelection === 'rock' && computerSelection === 'scissors') {
         ++playerScore;
-        return `You Win! ${playerSelection.toUpperCase()} beats ${computerSelection.toUpperCase()}.\n`;
+        return `You Win! ${playerSelection.toUpperCase()} beats ${computerSelection.toUpperCase()}.`;
     } else if (playerSelection === 'rock' && computerSelection === 'paper') {
         ++computerScore;
         return `You Lose! ${computerSelection.toUpperCase()} beats ${playerSelection.toUpperCase()}.`;
@@ -48,53 +54,29 @@ function playRound(playerSelection) {
     } else if (playerSelection === 'scissors' && computerSelection === 'rock') {
         ++computerScore;
         return `You Lose! ${computerSelection.toUpperCase()} beats ${playerSelection.toUpperCase()}.`;
-    } else {return 'No Winner!'}
-
-    // runningScore.append(lineBreak);
-
-    // console.log(playerScore, computerScore);
+    } else {return `No Winner! ${playerSelection.toUpperCase()} vs ${computerSelection.toUpperCase()}.`}
 }
 
-// function runningScore(score, message) {
-    // see running score after playRound has been called and store in score
-    // take return value from playRound and store in message
-// }
-
-// Play 5 rounds of the game
-/* function playGame() {
-    for (let i = 0; i < 5; i++) {
-        playRound();
-        
-        //  CONSOLE.LOG results of playRound()
-        console.log(playRound(playerSelection, computerSelection));
-        console.log(`Player: ${playerSelection.toUpperCase()}, Score: ${playerScore} \nComputer: ${computerSelection.toUpperCase()}, Score: ${computerScore}`);
-
-        if (i < 4) {
-            playerSelection = (prompt('Choose your weapon: rock 🪨, paper 🧻, scissors ✂')).toLowerCase();
-            computerSelection = getComputerChoice();
+// Check final scores
+function checkFinalScore() {
+    if (playerScore === 5 || computerScore === 5) {
+        if (playerScore > computerScore) {
+            alert("Congratulations! You are the winner! 🏆");
+            /* finalResult.textContent = "Congratulations! You are the winner! 🏆";
+            results.append(finalResult); */ 
+        } else if (computerScore > playerScore) {
+            alert("You lose! Better luck next time! 😔");
+            /* finalResult.textContent = "You lose! Better luck next time! 😔";
+            results.append(finalResult); */ 
         } else {
-            if (playerScore > computerScore) {
-                console.log("Congratulations! You are the winner! 🏆");
-            } else if (computerScore > playerScore) {
-                console.log("You lose! Better luck next time! 😔");
-            } else {
-                console.log("There are no winners, only survivors 💀");
-            }
+            alert("There are no winners, only survivors 💀");
+            /* finalResult.textContent = "There are no winners, only survivors 💀";
+            results.append(finalResult); */
         }
+
+        playerScore = 0;
+        computerScore = 0;
+
+        runningScore.textContent = "";
     }
-} */
-
-// playGame();
-
-
-/* function displayWinner() {
-    ++playerScore;
-    return `You Win! ${playerSelection.toUpperCase()} beats ${computerSelection.toUpperCase()}.`;
 }
-
-function displayLoser() {
-    ++computerScore;
-    return `You Lose! ${computerSelection.toUpperCase()} beats ${playerSelection.toUpperCase()}.`;
-} */
-
-// let playerSelection = (prompt('Choose your weapon: rock 🪨, paper 🧻, scissors ✂')).toLowerCase();
