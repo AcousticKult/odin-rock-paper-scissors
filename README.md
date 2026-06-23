@@ -8,6 +8,7 @@ My learnings from this project include:
 * Using functions to create reusable blocks of code
 * Problem solving using the browser debugger and `console.log()`
 * Version control using Git and GitHub
+* DOM manipulation
 
 
 <p align="right">(<a href="#top">back to top</a>)</p>
